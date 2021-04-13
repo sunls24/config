@@ -1,0 +1,95 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: placeless_flypy
+  name: 💭 小鹤双拼
+  version: "0.1"
+  author:
+    - double pinyin layout by 鶴
+    - Rime schema by 佛振 <chen.sst@gmail.com>
+    - Mod by placeless
+  description: |
+    小鹤双拼自定义方案。
+
+switches:
+  - name: full_shape
+    reset: 0
+    states: [ 半角, 全角 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+
+engine:
+  processors:
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+
+speller:
+  alphabet: 'zyxwvutsrqponmlkjihgfedcba'
+  delimiter: " '"
+  algebra:
+    - erase/^xx$/
+    - derive/^([jqxy])u$/$1v/
+    - derive/^([aoe])([ioun])$/$1$1$2/
+    - xform/^([aoe])(ng)?$/$1$1$2/
+    - xform/iu$/Q/
+    - xform/(.)ei$/$1W/
+    - xform/uan$/R/
+    - xform/[uv]e$/T/
+    - xform/un$/Y/
+    - xform/^sh/U/
+    - xform/^ch/I/
+    - xform/^zh/V/
+    - xform/uo$/O/
+    - xform/ie$/P/
+    - xform/i?ong$/S/
+    - xform/ing$|uai$/K/
+    - xform/(.)ai$/$1D/
+    - xform/(.)en$/$1F/
+    - xform/(.)eng$/$1G/
+    - xform/[iu]ang$/L/
+    - xform/(.)ang$/$1H/
+    - xform/ian$/M/
+    - xform/(.)an$/$1J/
+    - xform/(.)ou$/$1Z/
+    - xform/[iu]a$/X/
+    - xform/iao$/N/
+    - xform/(.)ao$/$1C/
+    - xform/ui$/V/
+    - xform/in$/B/
+    - xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/
+
+translator:
+  dictionary: extended
+  prism: placeless_flypy
+  contextual_suggestions: true
+  max_homophones: 7
+
+grammar:
+  language: zh-hans-t-essay-bgw
+
+punctuator:
+  import_preset: default
+  
+recognizer:
+  import_preset: default
+
+key_binder:
+#  import_preset: default
+  bindings:
+    __patch:
+      - key_bindings:/move_by_word_with_tab
+      - key_bindings:/paging_with_minus_equal
