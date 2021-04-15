@@ -21,11 +21,11 @@ limit coredumpsize 0
 #bindkey -v
 
 ### completion
-autoload -Uz compinit
-compinit
-
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+autoload -Uz compinit
+compinit
 ### completion
 
 ### sudo

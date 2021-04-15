@@ -1,5 +1,25 @@
-# config
-自用的一些 linux 配置文件
+# Arch 下自用配置文件
 
-- `.zshrc`  zsh的配置，不使用 `Oh My Zsh`，自己简单配置两个插件和主题足够用了。插件：`zsh-syntax-highlighting` 和 `zsh-autosuggestions` 主题：`powerlevel10k.zsh-theme` （需要提前安装好）
-- `rime` rime 输入法配置，小鹤双拼简体字。基于 `placeless` 的模型和 `四叶草` 的词库。
+## .zshrc
+
+`zsh` 终端配置，不使用 `Oh My Zsh`，自己简单配置两个插件和主题足够用了。[参考链接](https://zhuanlan.zhihu.com/p/345559097)
+
+```bash
+# 安装zsh，插件和主题
+sudo pacman -S zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions zsh-theme-powerlevel10k
+# 切换终端
+chsh -s /usr/bin/zsh
+# copy配置，注销重启
+cp .zshrc ~
+```
+## rime
+
+`RIME` 输入法配置，使用小鹤双拼，只支持简体字。基于 [`placeless`](https://github.com/placeless/squirrel_config) 和 [`四叶草`](https://github.com/fkxxyz/rime-cloverpinyin) 的词库。
+
+```bash
+# 安装ibus-rime输入法
+sudo pacman -S ibus-rime
+# copy配置，重新部署
+sudo cp rime/* ~/.config/ibus/rime
+```
+
