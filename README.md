@@ -25,3 +25,10 @@ sudo cp rime/* ~/.config/ibus/rime
 
 ## .vimrc
 
+`VIM` 编辑器配置文件
+```
+cp .vimrc ~
+```
+
+## goland-settings.zip
+`Goland` IDE 设置文件，在编辑器中导入设置即可
