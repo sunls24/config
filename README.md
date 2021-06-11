@@ -23,3 +23,5 @@ sudo pacman -S ibus-rime
 sudo cp rime/* ~/.config/ibus/rime
 ```
 
+## .vimrc
+
