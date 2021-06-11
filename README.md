@@ -31,4 +31,4 @@ cp .vimrc ~
 ```
 
 ## goland-settings.zip
-`Goland` IDE 设置文件，在编辑器中导入设置即可
+`Goland` IDE 设置文件，在编辑器中导入即可
