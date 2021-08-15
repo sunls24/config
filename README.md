@@ -32,3 +32,13 @@ cp .vimrc ~
 
 ## goland-settings.zip
 `Goland` IDE 设置文件，在编辑器中导入即可
+
+## GRUB2 theme
+[`arch-silence`](https://github.com/fghibellini/arch-silence)
+
+```
+sudo vim /etc/default/grub
+# GRUB_THEME="/boot/grub/themes/arch-silence/theme.txt"
+
+./install.sh
+```
