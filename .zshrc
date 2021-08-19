@@ -18,7 +18,7 @@ setopt PUSHD_IGNORE_DUPS
 
 limit coredumpsize 0
 
-#bindkey -v
+bindkey -v
 
 ### completion
 zstyle ':completion:*' menu select
@@ -55,20 +55,11 @@ alias ..='cd ..'
 
 # ls
 alias ls='ls -F --color'
-alias ll='ls -l'
-alias la='ls -lA'
-
-# git
-alias gl='git pull'
-alias gp='git push'
-alias gd='git diff'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gco='git checkout'
-alias gb='git branch'
-alias gs='git status'
+alias ll='ls -lh'
+alias la='ll -A'
 
 # other
 alias grep='grep --color=auto'
-alias docker='sudo docker'
+alias proxy='export http_proxy=http://127.0.0.1:8889;export https_proxy=http://127.0.0.1:8889'
+alias proxyoff='unset http_proxy;unset https_proxy'
 ### alias end
