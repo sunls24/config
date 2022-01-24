@@ -1,0 +1,18 @@
+eog
+file-roller
+gdm
+gedit
+gnome-calculator
+gnome-calendar
+gnome-characters
+gnome-disk-utility
+gnome-keyring
+nautilus
+xdg-user-dirs-gtk
+
+# 可选
+gnome-boxes
+
+# 被依赖
+gnome-shell
+gnome-control-center
