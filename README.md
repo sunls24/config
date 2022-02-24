@@ -25,7 +25,7 @@ sudo cp rime/* ~/.config/ibus/rime
 
 ## .vimrc
 
-`VIM` 编辑器配置文件
+`VIM` 编辑器配置文件, 另外也可以使用 [`amix/vimrc`](https://github.com/amix/vimrc) 的配置
 ```
 cp .vimrc ~
 ```
