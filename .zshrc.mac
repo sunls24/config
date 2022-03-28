@@ -1,0 +1,73 @@
+export EDITOR="vim"
+
+### options
+setopt CORRECT          #自动更正错误
+setopt EXTENDEDGLOB     #扩展通配符
+setopt NOCASEGLOB       #通配符不区分大小写
+### options end
+
+### history
+HISTFILE=~/.zsh_history
+HISTSIZE=1024
+SAVEHIST=1024
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+#setopt INC_APPEND_HISTORY
+
+setopt HIST_IGNORE_DUPS
+#setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+### history end
+
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+
+limit coredumpsize 0
+
+### completion
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+autoload -Uz compinit
+compinit
+### completion end
+
+### sudo
+sudo-command-line() {
+[[ -z $BUFFER ]] && zle up-history
+[[ $BUFFER != sudo\ * ]] && BUFFER="sudo $BUFFER"
+zle end-of-line
+}
+zle -N sudo-command-line
+bindkey "\e\e" sudo-command-line
+### sudo end
+
+### alias
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+# cd
+alias ..='cd ..'
+
+# ls
+alias ls='ls -GF'
+alias ll='ls -lh'
+alias la='ll -A'
+
+# other
+alias grep='grep --color=auto'
+### alias end
+
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
+
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
