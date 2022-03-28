@@ -8,8 +8,8 @@ setopt NOCASEGLOB       #通配符不区分大小写
 
 ### history
 HISTFILE=~/.zsh_history
-HISTSIZE=512
-SAVEHIST=512
+HISTSIZE=1024
+SAVEHIST=1024
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 #setopt INC_APPEND_HISTORY
@@ -24,38 +24,10 @@ setopt PUSHD_IGNORE_DUPS
 
 limit coredumpsize 0
 
-### keybindings from manjaro-gnome
-bindkey -e
-bindkey '^[[7~' beginning-of-line                               # Home key
-bindkey '^[[H' beginning-of-line                                # Home key
-if [[ "${terminfo[khome]}" != "" ]]; then
-  bindkey "${terminfo[khome]}" beginning-of-line                # [Home] - Go to beginning of line
-fi
-bindkey '^[[8~' end-of-line                                     # End key
-bindkey '^[[F' end-of-line                                      # End key
-if [[ "${terminfo[kend]}" != "" ]]; then
-  bindkey "${terminfo[kend]}" end-of-line                       # [End] - Go to end of line
-fi
-bindkey '^[[2~' overwrite-mode                                  # Insert key
-bindkey '^[[3~' delete-char                                     # Delete key
-bindkey '^[[C'  forward-char                                    # Right key
-bindkey '^[[D'  backward-char                                   # Left key
-bindkey '^[[5~' history-beginning-search-backward               # Page up key
-bindkey '^[[6~' history-beginning-search-forward                # Page down key
-
-# Navigate words with ctrl+arrow keys
-bindkey '^[Oc' forward-word
-bindkey '^[Od' backward-word
-bindkey '^[[1;5D' backward-word
-bindkey '^[[1;5C' forward-word
-bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
-bindkey '^[[Z' undo                                             # Shift+tab undo last action
-### keybindings end
-
 ### completion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-#zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 autoload -Uz compinit
 compinit
@@ -71,13 +43,6 @@ zle -N sudo-command-line
 bindkey "\e\e" sudo-command-line
 ### sudo end
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 ### alias
 alias cp='cp -i'
 alias mv='mv -i'
@@ -87,12 +52,22 @@ alias rm='rm -i'
 alias ..='cd ..'
 
 # ls
-alias ls='ls -F --color'
+alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ll -A'
 
 # other
 alias grep='grep --color=auto'
-alias proxy='export http_proxy=http://127.0.0.1:8889;export https_proxy=http://127.0.0.1:8889'
-alias proxyoff='unset http_proxy;unset https_proxy'
 ### alias end
+
+source <(kubectl completion zsh)
+alias k=kubectl
+compdef __start_kubectl k
+
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
