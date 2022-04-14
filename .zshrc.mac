@@ -24,6 +24,8 @@ setopt PUSHD_IGNORE_DUPS
 
 limit coredumpsize 0
 
+bindkey -e
+
 ### completion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
