@@ -42,3 +42,6 @@ sudo vim /etc/default/grub
 
 ./install.sh
 ```
+
+## ruleset.sh
+`Clash` 的规则配置文件批量下载脚本，详细查看: [`https://github.com/Loyalsoldier/clash-rules`](https://github.com/Loyalsoldier/clash-rules)
