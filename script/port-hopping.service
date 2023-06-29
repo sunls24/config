@@ -1,0 +1,13 @@
+[Unit]
+Description=Port hopping
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/sunls/docker/ph.sh start 5000 6000 6666
+RemainAfterExit=yes
+StandardOutput=null
+StandardError=null
+
+[Install]
+WantedBy=multi-user.target
