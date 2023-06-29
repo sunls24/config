@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+cd "$HOME"/Downloads/ || exit
+/opt/homebrew/bin/rz -E -e -b 2>/dev/null
+
+sleep 0.1
+echo

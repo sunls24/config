@@ -1,0 +1,11 @@
+{
+  "hideUpdateNotifications": true,
+  "keyMappings": "unmap o\nunmap O\nunmap zH\nunmap zL\nunmap H\nunmap L\nunmap v\nunmap V\nunmap gu\nunmap gU\nunmap m\nunmap `\nunmap <c-e>\nunmap <c-y>\nunmap /\nunmap n\nunmap N\nunmap *\nunmap #\nunmap J\nunmap K\nunmap gt\nunmap gT\nunmap ^\nunmap g0\nunmap g$\nunmap <a-m>\nunmap x\nunmap X\nunmap zi\nunmap zo\nunmap z0\nunmap gs\nunmap gf\nunmap gF\nunmap p\nunmap P",
+  "nextPatterns": "下一封,下页,下一页,下一章,后一页,下一张,next,more,newer,>,›,→,»,≫,>>",
+  "previousPatterns": "上一封,上页,上一页,上一章,前一页,上一张,prev,previous,back,older,<,‹,←,«,≪,<<",
+  "ignoreKeyboardLayout": true,
+  "searchEngines": "",
+  "settingsVersion": "2.3",
+  "userDefinedLinkHintCss": "div>.vimiumHintMarker{background:#fde68a;border:1px solid #d97706;box-shadow:0 1px 3px 0 rgb(0 0 0/.1),0 1px 2px -1px rgb(0 0 0/.1)}div>.vimiumHintMarker span{color:#451a03}div>.vimiumHintMarker>.matchingCharacter{color:#d97706}",
+  "exclusionRules": []
+}
