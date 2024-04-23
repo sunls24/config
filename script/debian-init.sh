@@ -3,11 +3,11 @@
 set -e
 
 apt update && apt upgrade -y
-apt install -y vim curl wget zsh git htop zsh-syntax-highlighting docker.io docker-compose jq systemd-timesyncd
+apt install -y vim curl wget zsh git htop zsh-syntax-highlighting docker.io docker-compose jq systemd-timesyncd tmux
 
 USERNAME=${1:-sunls}
-chsh -s /usr/bin/zsh $USERNAME
-[ $USERNAME = "root" ] || usermod -aG docker $USERNAME
+chsh -s /usr/bin/zsh "$USERNAME"
+[ "$USERNAME" = "root" ] || usermod -aG docker "$USERNAME"
 
 [ -e /etc/motd ] && rm /etc/motd
 sed -i 's|UsePAM yes|UsePAM no|' /etc/ssh/sshd_config
@@ -17,7 +17,7 @@ sed -i 's|#ClientAliveInterval 0|ClientAliveInterval 60|' /etc/ssh/sshd_config
 sed -i 's|#ClientAliveCountMax 3|ClientAliveCountMax 10|' /etc/ssh/sshd_config
 systemctl restart sshd
 
-sudo -i -u $USERNAME bash <<EOF
+sudo -i -u "$USERNAME" bash <<EOF
 set -e
 
 # zsh

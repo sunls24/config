@@ -5,7 +5,7 @@ set -e
 pacman --noconfirm -Syyu
 pacman -S --noconfirm --needed sudo wget zsh git base-devel \
     zsh-syntax-highlighting zsh-autosuggestions zsh-theme-powerlevel10k \
-    docker docker-compose jq bind unzip
+    docker docker-compose jq bind unzip tmux
 
 cat >/etc/sysctl.d/bbr.conf <<EOF
 net.core.default_qdisc=fq

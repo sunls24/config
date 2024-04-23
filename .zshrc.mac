@@ -59,6 +59,11 @@ alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ll -A'
 
+# tmux
+alias ta='tmux new -Asmain'
+alias tc='tmux -CC new -Asmain'
+alias td='tmux detach'
+
 # other
 alias dc='docker-compose'
 alias grep='grep --color=auto'
