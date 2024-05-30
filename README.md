@@ -31,7 +31,7 @@ curl -sfO https://raw.githubusercontent.com/sunls24/config/main/vimium-options.j
 ```shell
 curl -sfLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh && chmod +x debi.sh
 
-./debi.sh --bbr --cloud-kernel --ethx --timezone Asia/Shanghai --full-upgrade --version 12 --grub-timeout 0 --ssh-port 24 --hostname xxx --user sunls --password xxx
+./debi.sh --full-upgrade --cloud-kernel --bbr --ethx --grub-timeout 0 --timezone Asia/Shanghai --version 12 --ssh-port 24 --hostname xxx --user sunls --password xxx
 
 # 重启
 shutdown -r now

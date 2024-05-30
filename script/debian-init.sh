@@ -3,7 +3,7 @@
 set -e
 
 apt update && apt upgrade -y
-apt install -y vim curl wget zsh git htop zsh-syntax-highlighting docker.io docker-compose jq systemd-timesyncd tmux
+apt install -y vim curl wget zsh git htop zsh-syntax-highlighting docker.io docker-compose jq systemd-timesyncd tmux dnsutils
 
 USERNAME=${1:-sunls}
 chsh -s /usr/bin/zsh "$USERNAME"
@@ -32,8 +32,7 @@ sed -i 's|/usr/share/zsh/plugins|~/.zsh|' .zshrc
 sed -i 's|/usr/share/zsh-theme-|~/.zsh/|' .zshrc
 
 echo "
-alias upgrade='sudo apt update && sudo apt upgrade -y'
-alias cleanup='sudo apt autoremove && sudo apt clean && sudo apt autoclean && sudo rm -rf /var/lib/apt/lists/* && sudo apt update'" >> .zshrc
+alias upgrade='sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo apt clean && sudo apt autoclean'" >> .zshrc
 
 # vim
 [ -e .vimrc ] || curl -sf https://raw.githubusercontent.com/sunls24/config/master/one.vim | bash
