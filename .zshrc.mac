@@ -68,6 +68,6 @@ alias td='tmux detach'
 
 # other
 alias grep='grep --color=auto'
-alias upgrade='brew update && brew update --cask && brew upgrade && brew upgrade --cask --greedy'
+alias upgrade='brew update && brew upgrade && brew upgrade --cask --greedy'
 alias cleanup='brew cleanup --prune all && brew cleanup -s && rm -rf "$(brew --cache)"'
 ### alias end
