@@ -1,0 +1,209 @@
+{
+  "log": {
+    "level": "warn"
+  },
+  "dns": {
+    "servers": [
+      {
+        "type": "h3",
+        "tag": "dns_direct",
+        "server": "223.5.5.5"
+      },
+      {
+        "type": "udp",
+        "tag": "dns_proxy",
+        "server": "8.8.8.8",
+        "detour": "PROXY"
+      },
+      {
+        "type": "fakeip",
+        "tag": "dns_fakeip",
+        "inet4_range": "28.0.0.0/16"
+      }
+    ],
+    "rules": [
+      {
+        "clash_mode": "Direct",
+        "server": "dns_direct"
+      },
+      {
+        "clash_mode": "Global",
+        "server": "dns_proxy"
+      },
+      {
+        "rule_set": ["direct", "cn"],
+        "server": "dns_direct"
+      },
+      {
+        "rule_set": "proxy",
+        "query_type": ["A", "AAAA"],
+        "strategy": "ipv4_only",
+        "server": "dns_fakeip",
+        "rewrite_ttl": 60
+      },
+      {
+        "rule_set": "ads",
+        "action": "reject"
+      }
+    ],
+    "reverse_mapping": true,
+    "independent_cache": true,
+    "strategy": "prefer_ipv4",
+    "final": "dns_proxy"
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "auto_route": false,
+      "interface_name": "utun",
+      "address": ["198.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "stack": "system"
+    },
+    {
+      "tag": "mixed",
+      "type": "mixed",
+      "listen": "::",
+      "listen_port": 8000
+    },
+    {
+      "type": "redirect",
+      "listen": "::",
+      "listen_port": 7890
+    },
+    {
+      "type": "direct",
+      "listen": "::",
+      "listen_port": 1053
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "PROXY",
+      "type": "selector",
+      "outbounds": ["anytls", "hy2"]
+    },
+    {
+      "tag": "anytls",
+      "type": "anytls",
+      "server": "!!replace!!",
+      "server_port": 8443,
+      "password": "!!replace!!",
+      "tls": {
+        "enabled": true,
+        "server_name": "!!replace!!"
+      }
+    },
+    {
+      "tag": "hy2",
+      "type": "hysteria2",
+      "server": "!!replace!!",
+      "server_ports": ["5000:6000"],
+      "password": "!!replace!!",
+      "up_mbps": 500,
+      "down_mbps": 500,
+      "tls": {
+        "enabled": true,
+        "server_name": "!!replace!!",
+        "alpn": ["h3"]
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route": {
+    "final": "PROXY",
+    "auto_detect_interface": true,
+    "default_domain_resolver": "dns_direct",
+    "rules": [
+      {
+        "action": "sniff",
+        "timeout": "500ms"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "clash_mode": "Direct",
+        "outbound": "direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "PROXY"
+      },
+      {
+        "protocol": ["ssh", "ntp", "rdp", "bittorrent"],
+        "outbound": "direct"
+      },
+      {
+        "rule_set": ["direct", "cnip", "cn"],
+        "ip_is_private": true,
+        "outbound": "direct"
+      },
+      {
+        "protocol": ["stun", "quic"],
+        "action": "reject"
+      },
+      {
+        "rule_set": "ads",
+        "action": "reject"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "cnip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs",
+        "download_detour": "PROXY",
+        "update_interval": "7d"
+      },
+      {
+        "tag": "cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs",
+        "download_detour": "PROXY",
+        "update_interval": "7d"
+      },
+      {
+        "tag": "proxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/proxy.srs",
+        "download_detour": "PROXY",
+        "update_interval": "7d"
+      },
+      {
+        "tag": "ads",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ads.srs",
+        "download_detour": "PROXY",
+        "update_interval": "7d"
+      },
+      {
+        "tag": "direct",
+        "type": "remote",
+        "format": "source",
+        "url": "https://sunls.de/x/direct.json",
+        "download_detour": "direct",
+        "update_interval": "30d"
+      }
+    ]
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090"
+    }
+  },
+  "certificate": {
+    "store": "chrome"
+  }
+}
