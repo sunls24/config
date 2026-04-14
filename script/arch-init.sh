@@ -53,7 +53,7 @@ fi
 [ -e .zshrc ] || curl -s https://raw.githubusercontent.com/sunls24/config/master/.zshrc -o .zshrc
 
 # vim
-[ -e .vimrc ] || curl -s https://raw.githubusercontent.com/sunls24/config/master/one.vim | bash
+[ -e .vimrc ] || curl -s https://raw.githubusercontent.com/sunls24/config/master/flexoki.vim | bash
 
 # ssh
 [ -e .ssh ] || (mkdir .ssh && chmod 700 .ssh)

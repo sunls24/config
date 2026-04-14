@@ -10,10 +10,10 @@ curl -sfO https://raw.githubusercontent.com/sunls24/config/master/.zshrc
 
 ## .vimrc
 
-`vim` 基础配置：[amix/vimrc](https://github.com/amix/vimrc)，`one-light` 主题：[rakr/vim-one](https://github.com/rakr/vim-one)
+`vim` 基础配置：[amix/vimrc](https://github.com/amix/vimrc)，`flexoki` 主题：[kepano/flexoki](https://github.com/kepano/flexoki)
 
 ```shell
-curl -sf https://raw.githubusercontent.com/sunls24/config/master/one.vim | bash
+curl -sf https://raw.githubusercontent.com/sunls24/config/master/flexoki.vim | bash
 ```
 
 ## Vimium
@@ -23,6 +23,12 @@ curl -sf https://raw.githubusercontent.com/sunls24/config/master/one.vim | bash
 ```shell
 curl -sfO https://raw.githubusercontent.com/sunls24/config/main/vimium-options.json
 ```
+
+## Ghostty 配置
+
+[ghostty.config](https://github.com/sunls24/config/blob/main/ghostty.config)，字体使用 [Liga SFMono Nerd Font](https://github.com/shaunsingh/SFMono-Nerd-Font-Ligaturized)
+
+[ghostty](https://github.com/ghostty-org/ghostty) 是一款快速、原生、功能丰富的终端模拟器；好用，爱用！
 
 ## VPS 网络重装
 
