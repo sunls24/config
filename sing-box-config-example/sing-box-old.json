@@ -37,6 +37,11 @@
         "server": "dns_proxy"
       },
       {
+        "rule_set": "ads",
+        "server": "dns_block",
+        "disable_cache": true
+      },
+      {
         "rule_set": ["direct", "cn"],
         "server": "dns_direct"
       },
@@ -45,13 +50,9 @@
         "query_type": ["A", "AAAA"],
         "server": "dns_fakeip",
         "rewrite_ttl": 60
-      },
-      {
-        "rule_set": "ads",
-        "server": "dns_block",
-        "disable_cache": true
       }
     ],
+    "reverse_mapping": true,
     "independent_cache": true,
     "strategy": "ipv4_only",
     "final": "dns_proxy",
@@ -62,11 +63,9 @@
   },
   "inbounds": [
     {
-      "tag": "tun",
       "type": "tun",
       "auto_route": true,
       "address": "198.18.0.1/30",
-      "route_exclude_address": ["192.168.0.0/16"],
       "platform": {
         "http_proxy": {
           "enabled": true,
@@ -86,7 +85,8 @@
     {
       "tag": "PROXY",
       "type": "selector",
-      "outbounds": ["anytls", "hy2"]
+      "outbounds": ["anytls", "hy2"],
+      "interrupt_exist_connections": true
     },
     {
       "tag": "anytls",
@@ -136,6 +136,10 @@
         "outbound": "PROXY"
       },
       {
+        "rule_set": "ads",
+        "action": "reject"
+      },
+      {
         "rule_set": ["direct", "cnip", "cn"],
         "ip_is_private": true,
         "outbound": "direct"
@@ -151,10 +155,6 @@
       {
         "protocol": ["ssh", "ntp", "rdp", "bittorrent"],
         "outbound": "direct"
-      },
-      {
-        "rule_set": "ads",
-        "action": "reject"
       }
     ],
     "final": "PROXY",

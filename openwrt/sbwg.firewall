@@ -1,0 +1,21 @@
+# /etc/config/firewall
+
+config rule
+        option name 'Allow-WG'
+        option src 'wan'
+        option proto 'udp'
+        option dest_port '8810'
+        option target 'ACCEPT'
+
+config zone
+        option name 'sbwg'
+        list device 'sbwg'
+        option input 'ACCEPT'
+        option output 'ACCEPT'
+        option forward 'REJECT'
+        option masq '1'
+        option mtu_fix '1'
+
+config forwarding
+        option src 'lan'
+        option dest 'sbwg'

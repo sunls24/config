@@ -55,52 +55,37 @@
     {
       "type": "tun",
       "auto_route": true,
+      "auto_redirect": true,
+      "interface_name": "sbtun",
       "address": ["198.18.0.1/30", "fdfe:dcba:9876::1/126"],
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 8000
-        }
-      }
+      "route_exclude_address_set": "cnip",
+      "include_interface": ["br-pro"],
+      "exclude_mptcp": true,
+      "stack": "system",
+      "mtu": 1500
     },
     {
       "type": "mixed",
-      "listen": "127.0.0.1",
-      "listen_port": 8000,
-      "set_system_proxy": false
+      "listen": "::",
+      "listen_port": 8000
     }
   ],
   "outbounds": [
     {
       "tag": "PROXY",
       "type": "selector",
-      "outbounds": ["anytls", "hy2"],
+      "outbounds": ["anytls"],
       "interrupt_exist_connections": true
     },
     {
       "tag": "anytls",
       "type": "anytls",
-      "server": "!!replace!!",
+      "server": "x.x.x.x",
       "server_port": 8443,
-      "password": "!!replace!!",
+      "password": "xxxxx",
       "tls": {
         "enabled": true,
-        "server_name": "!!replace!!"
-      }
-    },
-    {
-      "tag": "hy2",
-      "type": "hysteria2",
-      "server": "!!replace!!",
-      "server_ports": ["5000:6000"],
-      "password": "!!replace!!",
-      "up_mbps": 500,
-      "down_mbps": 500,
-      "tls": {
-        "enabled": true,
-        "server_name": "!!replace!!",
-        "alpn": ["h3"]
+        "server_name": "x.x.x"
       }
     },
     {
@@ -121,6 +106,16 @@
         "action": "hijack-dns"
       },
       {
+        "network": "icmp",
+        "action": "bypass",
+        "outbound": "direct"
+      },
+      {
+        "ip_is_private": true,
+        "action": "bypass",
+        "outbound": "direct"
+      },
+      {
         "clash_mode": "Direct",
         "outbound": "direct"
       },
@@ -134,7 +129,6 @@
       },
       {
         "rule_set": ["direct", "cnip", "cn"],
-        "ip_is_private": true,
         "outbound": "direct"
       },
       {
@@ -155,7 +149,7 @@
         "tag": "cnip",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset-compatible/cnip.srs",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs",
         "download_detour": "PROXY",
         "update_interval": "7d"
       },
@@ -163,7 +157,7 @@
         "tag": "cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset-compatible/cn.srs",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs",
         "download_detour": "PROXY",
         "update_interval": "7d"
       },
@@ -171,7 +165,7 @@
         "tag": "proxy",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset-compatible/proxy.srs",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/proxy.srs",
         "download_detour": "PROXY",
         "update_interval": "7d"
       },
@@ -179,7 +173,7 @@
         "tag": "ads",
         "type": "remote",
         "format": "binary",
-        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset-compatible/ads.srs",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ads.srs",
         "download_detour": "PROXY",
         "update_interval": "7d"
       },
@@ -199,7 +193,7 @@
       "store_fakeip": true
     },
     "clash_api": {
-      "external_controller": "127.0.0.1:9090"
+      "external_controller": "0.0.0.0:9090"
     }
   }
 }

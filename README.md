@@ -58,15 +58,15 @@ curl -sf https://raw.githubusercontent.com/sunls24/config/master/script/debian-i
 curl -sf https://raw.githubusercontent.com/sunls24/config/master/script/arch-init.sh | bash
 ```
 
-## [ddns.sh](https://github.com/sunls24/config/blob/main/script/ddns.sh)
+## [ddns.sh](https://github.com/sunls24/config/blob/main/script/ddns/ddns.sh)
 
-可以在路由器中运行的简单 ddns 脚本，支持 `ipv4` 和 `ipv6`（需要 `cloudflare`）
+可以在 OpenWrt 路由器中运行的简单 ddns 脚本，支持 `ipv4` 和 `ipv6`（需要 `cloudflare`）
 
 ## [shellsb](https://github.com/sunls24/config/tree/main/shellsb)
 
 在路由器中运行 [`sing-box`](https://github.com/SagerNet/sing-box)，并使用 `iptables` 转发和过滤流量，仅转发指定 mac 地址的设备
 
-很多路由器存储空间有限，可以使用这里的[精简打包版本](https://github.com/sunls24/sing-box/actions/workflows/build-small.yml)
+很多路由器存储空间有限，可以使用这里的[精简打包版本](https://github.com/sunls24/sing-box/releases)
 
 ## sing-box 配置示例
 

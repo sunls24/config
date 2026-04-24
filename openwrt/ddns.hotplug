@@ -1,0 +1,8 @@
+## /etc/hotplug.d/iface/99-ddns
+
+#!/bin/sh
+
+[ "$ACTION" = "ifup" ] || exit 0
+[ "$INTERFACE" = "wan" ] || exit 0
+
+(sleep 5 && /root/ddns/ddns.sh) &

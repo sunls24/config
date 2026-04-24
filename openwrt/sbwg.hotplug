@@ -1,0 +1,12 @@
+## /etc/hotplug.d/net/99-sbwg
+
+#!/bin/sh
+
+[ "$DEVICENAME" = "sbwg" ] || exit 0
+[ "$ACTION" = "add" ] || exit 0
+(
+	for _ in 1 2 3; do
+		sleep 1
+		ip route replace 10.10.96.0/23 dev sbwg && exit 0
+	done
+) &
